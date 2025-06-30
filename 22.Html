@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assad Smart Pack Estimator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    select, p {
+      margin: 10px 0;
+    }
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Assad Smart Pack Estimator</h1>
+
+  <label for="productSelect" class="label">Select Product Type:</label>
+  <select id="productSelect"></select>
+
+  <p><span class="label">Materials:</span> <span id="materials"></span></p>
+  <p><span class="label">Barrier Type:</span> <span id="barrier"></span></p>
+  <p><span class="label">Estimated Price per kg (USD):</span> $<span id="price"></span></p>
+  <p><span class="label">Professional Note:</span> <span id="note"></span></p>
+  <p><em>This model is under testing. For business inquiries or feedback, connect with <a href="https://www.linkedin.com/in/mohamed-assad-%D9%85%D8%AD%D9%85%D8%AF-%D8%A3%D8%B3%D8%B9%D9%8A%D8%AF-308159a4/" target="_blank">Mohamed Assad</a>.</em></p>
+
+  <script>
+    const productData = {
+      "Snacks": {
+        materials: ["OPP 20μ", "MT 18μ", "LDPE"],
+        barrier: "Protects against light, oxygen and moisture",
+        priceUSD: 2.10,
+        explanation: "Used to maintain crispness, prevent rancidity, and enable high gloss printing."
+      },
+      "Coffee": {
+        materials: ["PET", "AL", "CPP"],
+        barrier: "Absolute barrier needed for aroma and oxygen protection",
+        priceUSD: 3.50,
+        explanation: "PET for strength, AL for barrier, valve for CO2 release."
+      },
+      "Dairy & Juices": {
+        materials: ["PET", "AL or Met PET", "PE"],
+        barrier: "Effective barrier against light and oxygen",
+        priceUSD: 2.90,
+        explanation: "Ensures extended shelf life for sensitive liquids."
+      },
+      "Frozen Foods": {
+        materials: ["PET", "EVA/LLDPE"],
+        barrier: "Resists freezer burn and brittle cracking",
+        priceUSD: 2.80,
+        explanation: "Needs 80μ to maintain flexibility and protection in low temperatures."
+      },
+      "Home Care": {
+        materials: ["PET", "NYLON", "Chemical-resistant PE"],
+        barrier: "Puncture, chemical, and leak resistance",
+        priceUSD: 2.60,
+        explanation: "Nylon provides strength, PE offers chemical resistance."
+      },
+      "Dry Foods": {
+        materials: ["BOPP", "CPP or LDPE"],
+        barrier: "Moderate barrier, insect & moisture protection",
+        priceUSD: 1.80,
+        explanation: "High gloss display packaging for rice, sugar, pulses, pasta, etc."
+      },
+      "Chocolate": {
+        materials: ["OPP or PET", "Met PET or AL 7-9μ", "CPP or PE"],
+        barrier: "Protection against fat/sugar bloom, light & humidity",
+        priceUSD: 2.80,
+        explanation: "Ensures flavor retention, shine, and sealing strength."
+      },
+      "Pharmaceuticals": {
+        materials: ["PET/OPA", "AL 20-25μ", "PVC or PE"],
+        barrier: "Sterility, light, moisture, oxygen barrier",
+        priceUSD: 4.20,
+        explanation: "Critical protection for shelf-stable medical products."
+      },
+      "Industrial Chemicals": {
+        materials: ["PET/OPA", "HDPE/LLDPE/EVA"],
+        barrier: "Chemical resistance, tear resistance, puncture",
+        priceUSD: 3.10,
+        explanation: "Heavy-duty, thick pouches (100–200μ) withstand corrosive agents."
+      },
+      "Ready Meals": {
+        materials: ["PET/OPA", "AL or SI-Ox", "Retort PP"],
+        barrier: "Heat & oxygen protection, microwave & sterilization compatible",
+        priceUSD: 3.30,
+        explanation: "Formulations safe for direct heating, retort process up to 121°C."
+      }
+    };
+
+    const select = document.getElementById('productSelect');
+    const materials = document.getElementById('materials');
+    const barrier = document.getElementById('barrier');
+    const price = document.getElementById('price');
+    const note = document.getElementById('note');
+
+    Object.keys(productData).forEach(type => {
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = type;
+      select.appendChild(option);
+    });
+
+    function updateDisplay(type) {
+      const data = productData[type];
+      materials.textContent = data.materials.join(', ');
+      barrier.textContent = data.barrier;
+      price.textContent = data.priceUSD.toFixed(2);
+      note.textContent = data.explanation;
+    }
+
+    select.addEventListener('change', (e) => {
+      updateDisplay(e.target.value);
+    });
+
+    // Initialize with first option
+    updateDisplay(select.value = Object.keys(productData)[0]);
+  </script>
+</body>
+</html>
